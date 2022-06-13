@@ -384,6 +384,130 @@ func Test_mergeTwoLists(t *testing.T) {
 				},
 			},
 		},
+		{
+			name: "two nil lists",
+			args: args{
+				list1: nil,
+				list2: nil,
+			},
+			want: nil,
+		},
+		{
+			name: "first nil list",
+			args: args{
+				list1: nil,
+				list2: &ListNode{
+					Val: 1,
+					Next: &ListNode{
+						Val: 3,
+						Next: &ListNode{
+							Val:  4,
+							Next: nil,
+						},
+					},
+				},
+			},
+			want: &ListNode{
+				Val: 1,
+				Next: &ListNode{
+					Val: 3,
+					Next: &ListNode{
+						Val:  4,
+						Next: nil,
+					},
+				},
+			},
+		},
+		{
+			name: "second nil list",
+			args: args{
+				list1: &ListNode{
+					Val: 1,
+					Next: &ListNode{
+						Val: 2,
+						Next: &ListNode{
+							Val:  4,
+							Next: nil,
+						},
+					},
+				},
+				list2: nil,
+			},
+			want: &ListNode{
+				Val: 1,
+				Next: &ListNode{
+					Val: 2,
+					Next: &ListNode{
+						Val:  4,
+						Next: nil,
+					},
+				},
+			},
+		},
+		{
+			name: "short first list",
+			args: args{
+				list1: &ListNode{
+					Val:  3,
+					Next: nil,
+				},
+				list2: &ListNode{
+					Val: 1,
+					Next: &ListNode{
+						Val: 3,
+						Next: &ListNode{
+							Val:  4,
+							Next: nil,
+						},
+					},
+				},
+			},
+			want: &ListNode{
+				Val: 1,
+				Next: &ListNode{
+					Val: 3,
+					Next: &ListNode{
+						Val: 3,
+						Next: &ListNode{
+							Val:  4,
+							Next: nil,
+						},
+					},
+				},
+			},
+		},
+		{
+			name: "second short list",
+			args: args{
+				list1: &ListNode{
+					Val:  2,
+					Next: nil,
+				},
+				list2: &ListNode{
+					Val: 1,
+					Next: &ListNode{
+						Val: 3,
+						Next: &ListNode{
+							Val:  4,
+							Next: nil,
+						},
+					},
+				},
+			},
+			want: &ListNode{
+				Val: 1,
+				Next: &ListNode{
+					Val: 2,
+					Next: &ListNode{
+						Val: 3,
+						Next: &ListNode{
+							Val:  4,
+							Next: nil,
+						},
+					},
+				},
+			},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

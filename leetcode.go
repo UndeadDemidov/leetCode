@@ -142,5 +142,45 @@ type ListNode struct {
 
 // https://leetcode.com/problems/merge-two-sorted-lists/
 func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
-	return nil
+	if list1 == nil {
+		return list2
+	}
+	if list2 == nil {
+		return list1
+	}
+	var pointer, result *ListNode
+	left, right := list1, list2
+	if left.Val > right.Val {
+		result = right
+		right = right.Next
+	} else {
+		result = left
+		left = left.Next
+	}
+	pointer = result
+
+	for !(left == nil && right == nil) {
+		if left == nil {
+			pointer.Next = right
+			break
+		}
+		if right == nil {
+			pointer.Next = left
+			break
+		}
+		if left.Val > right.Val {
+			pointer.Next = right
+			right = right.Next
+		} else {
+			pointer.Next = left
+			left = left.Next
+		}
+		pointer = pointer.Next
+	}
+	return result
 }
+
+// https://leetcode.com/problems/merge-sorted-array/
+// func merge(nums1 []int, m int, nums2 []int, n int) {
+//
+// }
